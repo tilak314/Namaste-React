@@ -40,10 +40,22 @@
 
 .res-cont{
     display:flex;
+    flex-wrap: wrap;
 }
 
+.res-card h2,h4{
+    margin-left: 5px;
+}
+
+.res-card{
+    background-color: #ebe3e3;
+}
 .res-logo{
     height: 170px;
     width: 190px;
     margin: 5px;
+}
+
+.filter-btn{
+    margin-top: 5px;;
 }

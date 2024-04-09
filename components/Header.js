@@ -1,8 +1,10 @@
+import { logoURL } from "../constants/cloudId";  //named import
+
 const Header = () => {
     return(
         <div className='header'>
           <div className='logo-cont'>
-            <img className="logo" alt="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRe4-aO_9Sh5b6Ja6DF-K5b1W3BH41Gozzs6w&s"></img>
+            <img className="logo" alt="logo" src={logoURL}></img>
           </div>
           <div className='nav-items'>
             <ul>

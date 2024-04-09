@@ -21,9 +21,9 @@ const Restaurent = (props) => {
             cloudinaryImageId}
         />
         <h2>{name}</h2>
-        <h4>Star rating : {avgRating}</h4>
-        <h4>Cuisines : {cuisines.join(", ")}</h4>
-        <h4>price : {costForTwo}</h4>
+        <h4>{avgRating} stars</h4>
+        <h4>{cuisines.join(", ")}</h4>
+        <h4>{costForTwo}</h4>
         </div>
     )
 }
