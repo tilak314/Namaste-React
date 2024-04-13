@@ -1,6 +1,9 @@
 import { logoURL } from "../constants/cloudId";  //named import
+import { useState } from "react";
 
 const Header = () => {
+
+  const[btnName, setBtnName] = useState('Login');
     return(
         <div className='header'>
           <div className='logo-cont'>
@@ -11,7 +14,11 @@ const Header = () => {
                 <li>Home</li>
                 <li>About</li>
                 <li>Contact</li>
-                <li>Login</li>
+                <button onClick={() => {
+                    btnName === "Login" ? setBtnName("Logout") : setBtnName("Login")
+                }}>
+                  {btnName}
+                </button>
             </ul>
           </div>
         </div>

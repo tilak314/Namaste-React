@@ -1,12 +1,38 @@
 import Restaurent from "./Restaurent";
 import resdata from "../constants/mockData"; //default import
 import { useState, useEffect } from "react";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
+  const [searchtxt, setSearchtxt] = useState("");
+  const [filteredRestaurents, setFilteredrestaurents] = useState([]);
+  const [errorMessage, setErrorMessage] = useState("");
   useEffect(() => {
     getRestaurants();
   }, []);
+
+  function filterData(searchText, restaurants) {
+    const resFilterData = restaurants.filter((restaurant) =>
+      restaurant?.info?.name.toLowerCase().includes(searchText.toLowerCase())
+    );
+    return resFilterData;
+  }
+
+  const searchData = (searchText, restaurants) => {
+    if (searchText !== "") {
+      const filteredData = filterData(searchText, restaurants);
+      console.log("filteredData", filteredData);
+      setFilteredrestaurents(filteredData);
+      setErrorMessage("");
+      if (filteredData?.length === 0) {
+        setErrorMessage("No matches restaurant found");
+      }
+    } else {
+      setErrorMessage("");
+      setFilteredrestaurents(restaurants);
+    }
+  };
 
   async function getRestaurants() {
     try {
@@ -29,18 +55,36 @@ const Body = () => {
 
       const resData = await checkJsonData(json);
       setAllRestaurants(resData);
+      setFilteredrestaurents(resData);
     } catch (error) {
       console.log(error);
     }
   }
-
-  return (
+  return allRestaurants.length === 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
-      <div className="search-cont">
-        <input className="search" type="text" placeholder="Search"></input>
-        <button className="search-btn">Search</button>
-      </div>
       <div className="filter">
+        <div className="search-cont">
+          <input
+            className="search"
+            type="text"
+            placeholder="Search"
+            value={searchtxt}
+            onChange={(e) => {
+              setSearchtxt(e.target.value);
+            }}
+          ></input>
+          <button
+            className="search-btn"
+            onClick={() => {
+              searchData(searchtxt, allRestaurants);
+            }}
+          >
+            Search
+          </button>
+        </div>
+
         <button
           className="filter-btn"
           onClick={() => {
@@ -51,8 +95,11 @@ const Body = () => {
           Filter
         </button>
       </div>
+
+      {errorMessage && <div className="error-container">{errorMessage}</div>}
+
       <div className="res-cont">
-        {allRestaurants.map((res) => (
+        {filteredRestaurents.map((res) => (
           <Restaurent key={res.id} resdata={res} />
         ))}
       </div>
