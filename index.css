@@ -71,6 +71,10 @@
     margin: 20px 0;
   }
 
+.btn-header{
+    margin: 0.5rem;
+}
+
 
 /*Shimmer CSS */
 .shimmer-container {
