@@ -57,5 +57,33 @@
 }
 
 .filter-btn{
-    margin-top: 5px;;
+    margin-left: 5px;
+    margin-top: 10px;
 }
+
+.filter{
+    display: flex;
+}
+
+.error-container {
+    text-align: center;
+    font-size: large;
+    margin: 20px 0;
+  }
+
+
+/*Shimmer CSS */
+.shimmer-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .shimmer-card {
+    flex-basis: 200px;
+    border-color: #d3d5df;
+  } 
+  .shimmer-container .shimmer-img {
+    margin: 10px;
+    height: 400px;
+    width: 200px;
+    background-color: #ebe3e3;
+  }
