@@ -2,6 +2,7 @@ import Restaurent from "./Restaurent";
 import resdata from "../constants/mockData"; //default import
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from 'react-router-dom';
 
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
@@ -99,9 +100,16 @@ const Body = () => {
       {errorMessage && <div className="error-container">{errorMessage}</div>}
 
       <div className="res-cont">
-        {filteredRestaurents.map((res) => (
-          <Restaurent key={res.id} resdata={res} />
-        ))}
+         {filteredRestaurents.map((res) => {
+            return (
+              <Link
+                to={"/restaurent/" + res?.info?.id}
+                key={res?.info?.id}
+              >
+                <Restaurent key={res.id} resdata={res} />
+              </Link>
+            );
+          })}
       </div>
     </div>
   );
