@@ -1,13 +1,15 @@
 .header{
     display: flex;
     justify-content: space-between;
-    border: 1px solid black;
 }
 
 
 .logo{
     width: 90px;
     padding-left: 20px;
+}
+
+.nav-items{
 }
 
 .nav-items > ul {
@@ -19,7 +21,8 @@
 .nav-items > ul >li{
     font-size: 25px;
     padding: 10px;
-    margin: 10px;
+    margin: 20px;
+    text-decoration: none;
 }
 
 .search{
@@ -28,14 +31,19 @@
 
 .res-card{
     margin-top: 10px;
+    margin-right: 5px;
     width: 200px;
     height: 400px;
     background-color: #f0f0f0;
-    border: 1px solid black;
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit; /* optional: prevents blue/purple link text */
 }
 
 .res-card:hover{
-    border: 1px;
+    border: 1px solid black;
 }
 
 .res-cont{
@@ -43,12 +51,13 @@
     flex-wrap: wrap;
 }
 
-.res-card h2,h4{
+.res-card h2,h4,h3,h5{
     margin-left: 5px;
 }
 
 .res-card{
-    background-color: #ebe3e3;
+    background-color: #f0f0f0;
+    margin: 4px;
 }
 .res-logo{
     height: 170px;

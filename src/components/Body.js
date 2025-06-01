@@ -1,8 +1,7 @@
 import Restaurent from "./Restaurent";
-import resdata from "../constants/mockData"; //default import
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
@@ -13,17 +12,11 @@ const Body = () => {
     getRestaurants();
   }, []);
 
-  function filterData(searchText, restaurants) {
-    const resFilterData = restaurants.filter((restaurant) =>
-      restaurant?.info?.name.toLowerCase().includes(searchText.toLowerCase())
-    );
-    return resFilterData;
-  }
-
   const searchData = (searchText, restaurants) => {
     if (searchText !== "") {
-      const filteredData = filterData(searchText, restaurants);
-      console.log("filteredData", filteredData);
+      const filteredData = restaurants.filter((restaurant) =>
+        restaurant?.info?.name.toLowerCase().includes(searchText.toLowerCase())
+      );
       setFilteredrestaurents(filteredData);
       setErrorMessage("");
       if (filteredData?.length === 0) {
@@ -100,16 +93,17 @@ const Body = () => {
       {errorMessage && <div className="error-container">{errorMessage}</div>}
 
       <div className="res-cont">
-         {filteredRestaurents.map((res) => {
-            return (
-              <Link
-                to={"/restaurent/" + res?.info?.id}
-                key={res?.info?.id}
-              >
-                <Restaurent key={res.id} resdata={res} />
-              </Link>
-            );
-          })}
+        {filteredRestaurents.map((res) => {
+          return (
+            <Link
+              to={"/restaurent/" + res?.info?.id}
+              key={res?.info?.id}
+              className="card-link"
+            >
+              <Restaurent key={res.id} resdata={res} />
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
