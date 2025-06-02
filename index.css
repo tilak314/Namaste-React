@@ -3,14 +3,17 @@
     justify-content: space-between;
 }
 
+.app{
+  max-width: 1100px; /* You can adjust this */
+  margin: 0 auto;
+}
+
 
 .logo{
     width: 90px;
     padding-left: 20px;
 }
 
-.nav-items{
-}
 
 .nav-items > ul {
     display: flex;
@@ -29,12 +32,10 @@
     margin-top:10px
 }
 
-.res-card{
-    margin-top: 10px;
-    margin-right: 5px;
-    width: 200px;
-    height: 400px;
-    background-color: #f0f0f0;
+.res-cont{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 4rem;
 }
 
 .card-link {
@@ -42,27 +43,84 @@
   color: inherit; /* optional: prevents blue/purple link text */
 }
 
-.res-card:hover{
-    border: 1px solid black;
-}
-
-.res-cont{
-    display:flex;
-    flex-wrap: wrap;
-}
-
-.res-card h2,h4,h3,h5{
-    margin-left: 5px;
-}
-
+/* restaurent card and its content css*/
 .res-card{
-    background-color: #f0f0f0;
-    margin: 4px;
+    margin-top: 10px;
+    margin-right: 5px;
+    width: 220px;
+    height: 300px;
+    transition: transform 0.3s ease;
+
 }
+
+.res-card:hover{
+     transform: scale(1.03);
+}
+
 .res-logo{
     height: 170px;
-    width: 190px;
+    width: 250px;
     margin: 5px;
+    border-radius: 10px;
+}
+
+.res-name{
+  margin-left: 12px;
+  font-size: 20px;
+  font-weight: 300px;
+  margin-bottom: 7px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.res-area {
+  margin-left: 12px;
+  color: #666;
+  font-size: 0.9rem;
+    margin-bottom: 7px;
+
+}
+
+.res-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  color: #444;
+}
+
+.rating-distance {
+  margin-bottom: 7px;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem; /* space between rating and distance */
+}
+
+.res-rating {
+  margin-left: 12px;
+
+  background-color: #48c479;
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.res-distance {
+  color: #555;
+  font-size: 0.85rem;
+}
+
+.res-cuisines {
+  
+  margin-left: 12px;
+  color: #555;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .filter-btn{
@@ -82,13 +140,6 @@
 
 .btn-header{
     margin: 0.5rem;
-}
-
-.restaurant-menu {
-  margin-top: 60px;
-}
-.restaurant-summary {
-  height: 230px;
 }
 
 .restaurant-menu-content {
@@ -116,8 +167,7 @@
   width: 848px;
   padding: 10px;
   margin-bottom: 10px;
-  border-color: #d3d5df;
-  box-shadow: 0 4px 7px 0 rgb(218 220 230 / 60%);
+  box-shadow: 0px 4px 8px rgba(236, 229, 229, 0.1);
 }
 .shimmer-img-wrapper {
   display: flex;
@@ -144,13 +194,13 @@
   }
   .shimmer-card {
     flex-basis: 200px;
-    border-color: #d3d5df;
   } 
   .shimmer-container .shimmer-img {
     margin: 10px;
-    height: 400px;
-    width: 200px;
-    background-color: #ebe3e3;
+    height: 350px;
+    width: 220px;
+    gap: 3rem;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
   }
   .shimmer-w60 {
     width: 60%;
@@ -187,37 +237,19 @@
     height: 170px;
     border-radius: 5px;
   }
-  .restaurant-summary-details {
-    display: flex;
-    flex-direction: column;
-    flex-basis: 520px;
-    margin: 20px;
-  }
+
   .restaurant-title {
     font-size: 40px;
     max-width: 540px;
-    font-weight: 300;
+    font-weight: 300px;
+  
   }
   .restaurant-tags {
-    white-space: nowrap;
-    color: inherit;
-    opacity: 0.7;
-    font-size: 15px;
-    max-width: 540px;
+    font-style: italic;
+    color: #d80f0f;
+
   }
-  .restaurant-details {
-    display: flex;
-    margin-top: 18px;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
-    font-weight: 600;
-    padding-bottom: 10px;
-    color: inherit;
-    font-weight: 600;
-    font-size: 16px;
-    max-width: 340px;
-  }
+
   .restaurant-rating {
     display: flex;
     align-items: center;
@@ -227,10 +259,6 @@
     border-radius: 5px;
   }
   
-  .restaurant-menu-content {
-    display: flex;
-    justify-content: center;
-  }
   
   .menu-items-container {
     margin-top: 30px;
@@ -309,3 +337,129 @@
     margin-top: 10px;
     border-radius: 5px;
   }
+  
+
+  .res-info-card{
+    height: 140px;
+    width: 800px;
+    border: 1px solid rgb(234, 223, 223);
+    border-radius: 20px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+    padding: 10px;
+    padding-bottom: 20px
+  }
+
+  
+
+  .restaurant-details {
+    margin: 18px;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 600;
+    padding-bottom: 10px;
+    color: inherit;
+    font-weight: 600;
+    font-size: 16px;
+    max-width: 340px;
+  }
+
+
+.rating-badge {
+    
+    
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+}
+
+.outlet-info{
+  padding-bottom: 10px;
+}
+
+.outlet-info::before,
+.delivery-time::before {
+    content: "|"; /* Vertical separator */
+    color: grey;
+    font-weight: bold;
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+/* restaurent menu search*/
+
+.res-menu-search{
+  margin: 90px;
+}
+
+.res-menu-seach-content{
+  height: 60px;
+  width: 800px;
+  border: 1px solid rgb(234, 223, 223);
+    border-radius: 20px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+    margin: 18px;
+    margin-left:1px;
+}
+
+
+  .toggle-group {
+      display: flex;
+      gap: 2rem;
+      margin: 60px;
+      padding-top: 20px;
+      margin-bottom: 20px;
+      margin-left: 20rem
+    }
+
+    .toggle-wrapper {
+      display: flex;
+      align-items: center;
+      background-color: #f1f1f1;
+      padding: 0.3rem 0.6rem;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .icon-box {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid;
+      margin-right: 8px;
+    }
+
+    .veg .icon-box {
+      border-color: #008000;
+    }
+
+    .nonveg .icon-box {
+      border-color: #d32f2f;
+    }
+
+    .veg .dot {
+      width: 10px;
+      height: 10px;
+      background-color: #008000;
+      border-radius: 50%;
+    }
+
+    .nonveg .triangle {
+      width: 0;
+      height: 0;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-bottom: 12px solid #d32f2f;
+    }
+
+
+

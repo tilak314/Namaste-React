@@ -7,17 +7,24 @@ const Restaurent = (props) => {
     name,
     areaName,
     avgRating,
-    costForTwo,
+    cuisines,
     sla,
   } = props.resdata.info;
   return (
     <div className="res-card">
       <img className="res-logo" src={cloudinaryImageIdURL + cloudinaryImageId} />
-      <h3>{name}</h3>
-      <h5>{areaName}</h5>
-      <h4>{avgRating}</h4>
-      <h4>{sla?.lastMileTravelString ?? "2.0 km"}</h4>
-      <h4>{costForTwo ?? "₹200 for two"}</h4>
+      <div className="res-name">{name}</div>
+  <div className="res-area">{areaName}</div>
+
+  <div className="res-meta">
+  <div className="rating-distance">
+    <span className="res-rating">⭐ {avgRating}</span>
+    <span className="res-distance">{sla?.lastMileTravelString ?? "2.0 km"}</span>
+  </div>
+  <div className="res-cuisines">
+    {cuisines.slice(0, 3).join(", ")}
+  </div>
+</div>
     </div>
   )
 }

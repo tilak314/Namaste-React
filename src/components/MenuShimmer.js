@@ -5,7 +5,7 @@ const MenuShimmer = () => {
   return (
     <div className="restaurant-menu">
         <div className="restaurant-summary stroke-color animate">
-          <img className="shimmer-img stroke animate" />
+          <div className="res-info-card"></div>
           <div className="restaurant-summary-details">
             <h2 className="shimmer-w40  stroke animate"></h2>
             <p className="shimmer-w20 stroke animate"></p>
