@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client'
 import './index.css';
 
-import Header from './components/Header';
-import Body from './components/Body';
-import Home from './components/Home';
-import Error from './components/Error';
-import Contact from './components/Contact';
-import About from './components/About';
-import RestaurentMenu from './components/RestaurentMenu';
 
+import Header from './src/components/Header';
+import Body from './src/components/Body';
+import Error from './src/components/Error';
+import Contact from './src/components/Contact';
+import About from './src/components/About';
+import RestaurentMenu from './src/components/RestaurentMenu';
+import Cart from './src/components/Cart'
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 
 
@@ -39,6 +39,10 @@ const Approuter = createBrowserRouter([
             {
                 path: '/contact',
                 element: <Contact/>
+            },
+            {
+                path: '/cart',
+                element: <Cart/>
             },
             {
                 path: '/restaurent/:resId',
