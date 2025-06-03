@@ -270,7 +270,7 @@
   .menu-count {
     margin-top: 14px;
     line-height: 1.3;
-    color: rgba(40, 44, 63, 0.45);
+    color: #666;
     letter-spacing: -0.3px;
     font-size: 1rem;
   }
@@ -301,7 +301,7 @@
   .item-desc {
     margin-top: 14px;
     line-height: 1.3;
-    color: rgba(40, 44, 63, 0.45);
+    color: #666;
     width: 60%;
     letter-spacing: -0.3px;
     font-size: 1rem;
