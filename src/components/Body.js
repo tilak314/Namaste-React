@@ -1,4 +1,4 @@
-import Restaurent from "./Restaurent";
+import Restaurent, {WithOpenlabel} from "./Restaurent";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -11,6 +11,10 @@ const Body = () => {
   useEffect(() => {
     getRestaurants();
   }, []);
+
+  console.log("allRestaurants", allRestaurants)
+
+  const WithOpenComponent = WithOpenlabel(Restaurent)
 
   const searchData = (searchText, restaurants) => {
     if (searchText !== "") {
@@ -100,7 +104,11 @@ const Body = () => {
               key={res?.info?.id}
               className="card-link"
             >
-              <Restaurent key={res.id} resdata={res} />
+              {res?.info?.isOpen ? (
+          <WithOpenComponent key={res?.info?.id} resdata={res} />
+        ) : (
+          <Restaurent key={res?.info?.id} resdata={res} />
+        )}
             </Link>
           );
         })}

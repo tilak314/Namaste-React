@@ -53,6 +53,12 @@
 
 }
 
+.isopen-class {
+  background-color: black;
+  color: white;
+  position:absolute;
+}
+
 .res-card:hover{
      transform: scale(1.03);
 }
