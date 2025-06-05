@@ -13,6 +13,11 @@ const RestaurantMenu = () => {
   const { resId } = useParams(); // call useParams and get value of restaurant id using object destructuring
   const [restaurant, setRestaurant] = useState(null); // call useState to store the api data in res
   const [menuItems, setMenuItems] = useState([]);
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const toggleAccordion = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
   useEffect(() => {
     getRestaurantInfo(); // call getRestaurantInfo function so it fetch api data and set data in restaurant state variable
   }, []);
@@ -30,22 +35,13 @@ const RestaurantMenu = () => {
           ?.info || null;
       setRestaurant(restaurantData);
 
-      // Set menu item data
-      const menuItemsData =
-        json?.data?.cards
-          .find((x) => x.groupedCard)
-          ?.groupedCard?.cardGroupMap?.REGULAR?.cards?.map((x) => x.card?.card)
-          ?.filter((x) => x["@type"] == MENU_ITEM_TYPE_KEY)
-          ?.map((x) => x.itemCards)
-          .flat()
-          .map((x) => x.card?.info) || [];
 
-      const uniqueMenuItems = [];
-      menuItemsData.forEach((item) => {
-        if (!uniqueMenuItems.find((x) => x.id === item.id)) {
-          uniqueMenuItems.push(item);
-        }
-      });
+      const uniqueMenuItems = json?.data?.cards
+        ?.filter((x) => x.groupedCard)
+        ?.map((x) => x.groupedCard?.cardGroupMap?.REGULAR?.cards)
+        ?.flat()
+        ?.filter((y) => y.card?.card?.["@type"] === MENU_ITEM_TYPE_KEY);
+
       setMenuItems(uniqueMenuItems);
     } catch (error) {
       setMenuItems([]);
@@ -97,41 +93,51 @@ const RestaurantMenu = () => {
         </div>
       </div>
 
-      <div className="restaurant-menu-content">
-        <div className="menu-items-container">
-          <div className="menu-title-wrap">
-            <h3 className="menu-title">Recommended</h3>
-            <p className="menu-count">{menuItems.length} ITEMS</p>
-          </div>
-          <div className="menu-items-list">
-            {menuItems.map((item) => (
-              <div className="menu-item" key={item?.id}>
-                <div className="menu-item-details">
-                  <h3 className="item-title">{item?.name}</h3>
-                  <p className="item-cost">
-                    {item?.price > 0
-                      ? new Intl.NumberFormat("en-IN", {
-                          style: "currency",
-                          currency: "INR",
-                        }).format(item?.price / 100)
-                      : " "}
-                  </p>
-                  <p className="item-desc">{item?.description}</p>
-                </div>
-                <div className="menu-img-wrapper">
-                  {item?.imageId && (
-                    <img
-                      className="menu-item-img"
-                      src={ITEM_IMG_CDN_URL + item?.imageId}
-                      alt={item?.name}
-                    />
-                  )}
-                  <button className="add-btn"> ADD +</button>
-                </div>
+      <div className="menu-accordion">
+        {menuItems.map((category, index) => {
+          const itemCategory = category?.card?.card;
+          const items = itemCategory?.itemCards || [];
+
+          return (
+            <div key={index} className="accordion-section">
+              <div
+                className="accordion-header"
+                onClick={() => toggleAccordion(index)}
+              >
+                {itemCategory?.title} {"(" + items.length + ")"}
+                <span>{openIndex === index ? "▲" : "▼"}</span>
               </div>
-            ))}
-          </div>
-        </div>
+
+              {openIndex === index && (
+                <div className="accordion-content">
+                  {items.map((itemCard, idx) => {
+                    const info = itemCard?.card?.info;
+                    return (
+                      <div key={info?.id || idx} className="menu-item">
+                        <div className="menu-item-text">
+                          <div className="menu-item-name">{info?.name}</div>
+                          <div className="menu-item-price">
+                            ₹{(info?.price || info?.defaultPrice) / 100}
+                          </div>
+                          <div className="menu-item-description">
+                            {info?.description}
+                          </div>
+                        </div>
+                        <img
+                          src={
+                            ITEM_IMG_CDN_URL +
+                            info?.imageId
+                          }
+                          alt={info?.name}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
