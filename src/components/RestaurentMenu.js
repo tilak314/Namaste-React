@@ -13,10 +13,10 @@ const RestaurantMenu = () => {
   const { resId } = useParams(); // call useParams and get value of restaurant id using object destructuring
   const [restaurant, setRestaurant] = useState(null); // call useState to store the api data in res
   const [menuItems, setMenuItems] = useState([]);
-  const [openIndex, setOpenIndex] = useState(null);
+  const [showItems, setshowItems] = useState(false);
 
-  const toggleAccordion = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
+  const toggleAccordion = () => {
+    { showItems ? setshowItems(false) : setshowItems(true)}
   };
   useEffect(() => {
     getRestaurantInfo(); // call getRestaurantInfo function so it fetch api data and set data in restaurant state variable
@@ -41,7 +41,7 @@ const RestaurantMenu = () => {
         ?.map((x) => x.groupedCard?.cardGroupMap?.REGULAR?.cards)
         ?.flat()
         ?.filter((y) => y.card?.card?.["@type"] === MENU_ITEM_TYPE_KEY);
-
+      console.log("uniqueMenuItems", uniqueMenuItems)
       setMenuItems(uniqueMenuItems);
     } catch (error) {
       setMenuItems([]);
@@ -61,7 +61,7 @@ const RestaurantMenu = () => {
 
           <div className="res-info-card">
             <div className="restaurant-details">
-              <div class="rating-badge">⭐
+              <div className="rating-badge">⭐
                 {restaurant?.avgRatingString +
                   " (" +
                   restaurant?.totalRatingsString +
@@ -79,16 +79,16 @@ const RestaurantMenu = () => {
         </div>
       </div>
 
-      <div class="toggle-group">
-        <div class="toggle-wrapper veg active">
-          <div class="icon-box">
-            <div class="dot"></div>
+      <div className="toggle-group">
+        <div className="toggle-wrapper veg active">
+          <div className="icon-box">
+            <div className="dot"></div>
           </div>
         </div>
 
-        <div class="toggle-wrapper nonveg">
-          <div class="icon-box">
-            <div class="triangle"></div>
+        <div className="toggle-wrapper nonveg">
+          <div className="icon-box">
+            <div className="triangle"></div>
           </div>
         </div>
       </div>
@@ -102,18 +102,20 @@ const RestaurantMenu = () => {
             <div key={index} className="accordion-section">
               <div
                 className="accordion-header"
-                onClick={() => toggleAccordion(index)}
+                onClick={() => toggleAccordion()}
               >
-                {itemCategory?.title} {"(" + items.length + ")"}
-                <span>{openIndex === index ? "▲" : "▼"}</span>
+                {itemCategory?.title} ({items.length})
+                <span>{showItems ? "▲" : "▼"}</span>
               </div>
 
-              {openIndex === index && (
+              {showItems && (
                 <div className="accordion-content">
                   {items.map((itemCard, idx) => {
                     const info = itemCard?.card?.info;
                     return (
                       <div key={info?.id || idx} className="menu-item">
+                        <div> {info?.itemAttribute?.vegClassifier === "VEG" ? "🟩" : "🔴"}
+                        </div>
                         <div className="menu-item-text">
                           <div className="menu-item-name">{info?.name}</div>
                           <div className="menu-item-price">
@@ -123,13 +125,17 @@ const RestaurantMenu = () => {
                             {info?.description}
                           </div>
                         </div>
-                        <img
+                        <div className="img-div">
+                          <img
                           src={
                             ITEM_IMG_CDN_URL +
                             info?.imageId
                           }
+                          className="img-class"
                           alt={info?.name}
                         />
+                        <button className="add-button">ADD</button>
+                        </div>
                       </div>
                     );
                   })}

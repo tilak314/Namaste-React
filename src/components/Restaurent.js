@@ -33,7 +33,7 @@ export const WithOpenlabel = (Restaurent) => {
   return (props) => {
     return (
       <div>
-        <label className="isopen-class">Open</label>
+        {/* <label className="isopen-class">Open</label> */}
         <Restaurent {...props}></Restaurent>
       </div>
     )
